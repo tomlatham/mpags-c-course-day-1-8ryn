@@ -18,43 +18,43 @@ int main(){
       else{
         switch (in_char){
         case '0':
-          output += "ZERO ";
+          output += "ZERO";
           break;
 
         case '1':
-          output += "ONE ";
+          output += "ONE";
           break;
 
         case '2':
-          output += "TWO ";
+          output += "TWO";
           break;
 
         case '3':
-          output += "THREE ";
+          output += "THREE";
           break;
 
         case '4':
-          output += "FOUR ";
+          output += "FOUR";
           break;
 	    
 	case '5':
-	  output += "FIVE ";
+	  output += "FIVE";
 	  break;
 	  
 	case '6':
-	  output += "SIX ";
+	  output += "SIX";
 	  break;
 	  
 	case '7':
-	  output += "SEVEN ";
+	  output += "SEVEN";
 	  break;
 	  
 	case '8':
-	  output += "EIGHT ";
+	  output += "EIGHT";
 	  break;
 	  
 	case '9':
-	  output += "NINE ";
+	  output += "NINE";
 	  break;
 
         default:
