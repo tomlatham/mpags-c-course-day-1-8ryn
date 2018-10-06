@@ -7,6 +7,13 @@ int main(int argc, char* argv[])
   //Puts command line arguments into a vector
   const std::vector<std::string> cmdLineArgs { argv, argv+argc };
   
+  if(cmdLineArgs[1] == "-h" || cmdLineArgs[1] == "--help"){
+    std::cout << "Usage: mpags-cipher numbers" << std::endl;
+    std::cout << "Currently this program will print your arguments capitalised and convert numbers to text"
+	      << std::endl;
+    return 0;
+  }
+  
   std::string output{""};
 
   // Loops over each command line string
