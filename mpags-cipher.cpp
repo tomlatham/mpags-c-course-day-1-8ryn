@@ -2,19 +2,48 @@
 #include <string>
 #include <vector>
 
+const std::string helpMsg = "Usage: mpahs-cipher \n Currently this program will print any alphanumeric text capitalised and convert numbers to text. Text entry continu\
+es until CTRL + D is pressed. The program also prints any arguments passed to the program.";
+const std::string vNum = "0.2.0";
+
 int main(int argc, char* argv[])
 {
   //Puts command line arguments into a vector
   const std::vector<std::string> cmdLineArgs { argv, argv+argc };
-  if(argc>1){
-    if(cmdLineArgs[1] == "-h" || cmdLineArgs[1] == "--help"){
-      std::cout << "Usage: mpags-cipher " << std::endl;
-      std::cout << "Currently this program will print any alphanumeric text capitalised and convert numbers to text. Text entry continues until CTRL + D is pressed. The program also prints any arguments passed to the program."
-		<< std::endl;
-    }
-    for(int i{1}; i<argc; i++){
-      std::cout << cmdLineArgs[i] << std::endl;
+  std::string input_file{"None"};
+  std::string output_file{"None"};
 
+  if(argc>1){
+    for(int i{1}; i<argc ; i++){
+      const std::string &argument = cmdLineArgs[i];
+      
+      if(argument == "-h" || argument == "--help"){
+	std::cout << helpMsg << std::endl;
+      }
+      else if(argument == "--version"){
+	std::cout << "Version number = " << vNum << std::endl;
+      }
+      else if(argument == "-i"){
+	if(++i < argc){
+	  input_file = cmdLineArgs[i];
+	  std::cout << "Input file = " << input_file << std::endl;
+	}
+	else{
+	  std::cout << "Error: No input file provided after \"-i\"" << std::endl;
+	}
+      }
+      else if(argument == "-o"){
+	if(++i < argc){
+	  output_file = cmdLineArgs[i];
+	  std::cout << "Output file = " << output_file << std::endl;
+	}
+	else{
+	  std::cout << "Error: No output file provided after \"-o\"" << std::endl;
+	}
+      }
+      else{
+	std::cout << "Argument " << i << " \"" << argument << "\" is invalid." << std::endl;
+      }
     }
   }
 
@@ -78,7 +107,7 @@ int main(int argc, char* argv[])
 	}
       }
 
-      
+
     }
   std::cout << output << std::endl;
 }
