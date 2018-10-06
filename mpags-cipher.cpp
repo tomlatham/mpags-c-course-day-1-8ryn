@@ -2,9 +2,12 @@
 #include <string>
 #include <vector>
 
-const std::string helpMsg = "Usage: mpahs-cipher \n Currently this program will print any alphanumeric text capitalised and convert numbers to text. Text entry continu\
-es until CTRL + D is pressed. The program also prints any arguments passed to the program.";
-const std::string vNum = "0.2.0";
+const std::string helpMsg = "Usage: mpags-cipher [options] \nOptions: \n -h   Display this information \n \
+--help Display this information \n -i   The following argument will be used as the input file \n -o   \
+The following argument will be used as the output file \n --version   Prints the current program version \
+\n\nCurrently this program will print any alphanumeric text capitalised and convert numbers to text. Text entry continu\
+es until CTRL + D is pressed.";
+const std::string vNum = "0.2.1";
 
 int main(int argc, char* argv[])
 {
