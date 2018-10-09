@@ -2,54 +2,75 @@
 #include <string>
 #include <vector>
 
-const std::string helpMsg = "Usage: mpags-cipher [options] \nOptions: \n -h   Display this information \n \
---help Display this information \n -i   The following argument will be used as the input file \n -o   \
-The following argument will be used as the output file \n --version   Prints the current program version \
-\n\nCurrently this program will print any alphanumeric text capitalised and convert numbers to text. Text entry continu\
-es until CTRL + D is pressed.";
-const std::string vNum = "0.2.1";
 
 int main(int argc, char* argv[])
 {
+  const std::string vNum = "0.2.1";
+
   //Puts command line arguments into a vector
   const std::vector<std::string> cmdLineArgs { argv, argv+argc };
-  std::string input_file{"None"};
-  std::string output_file{"None"};
 
-  if(argc>1){
-    for(int i{1}; i<argc ; i++){
-      const std::string &argument = cmdLineArgs[i];
-      
-      if(argument == "-h" || argument == "--help"){
-	std::cout << helpMsg << std::endl;
-      }
-      else if(argument == "--version"){
-	std::cout << "Version number = " << vNum << std::endl;
-      }
-      else if(argument == "-i"){
-	if(++i < argc){
-	  input_file = cmdLineArgs[i];
-	  std::cout << "Input file = " << input_file << std::endl;
-	}
-	else{
-	  std::cout << "Error: No input file provided after \"-i\"" << std::endl;
-	}
-      }
-      else if(argument == "-o"){
-	if(++i < argc){
-	  output_file = cmdLineArgs[i];
-	  std::cout << "Output file = " << output_file << std::endl;
-	}
-	else{
-	  std::cout << "Error: No output file provided after \"-o\"" << std::endl;
-	}
+  bool helpRequested{false};
+  bool versionRequested{false};
+  std::string input_file{""};
+  std::string output_file{""};
+
+  for(int i{1}; i<argc ; i++){
+    const std::string &argument = cmdLineArgs[i];
+
+    if(argument == "-h" || argument == "--help"){
+      helpRequested = true;
+    }
+    else if(argument == "--version"){
+      versionRequested = true;
+    }
+    else if(argument == "-i"){
+      if(++i < argc){
+	input_file = cmdLineArgs[i];
       }
       else{
-	std::cout << "Argument " << i << " \"" << argument << "\" is invalid." << std::endl;
+	std::cout << "Error: No input file provided after \"-i\"" << std::endl;
+	return 1;
       }
+    }
+    else if(argument == "-o"){
+      if(++i < argc){
+	output_file = cmdLineArgs[i];
+      }
+      else{
+	std::cout << "Error: No output file provided after \"-o\"" << std::endl;
+	return 1;
+      }
+    }
+    else{
+      std::cout << "Argument " << i << " \"" << argument << "\" is invalid." << std::endl;
+      return 1;
     }
   }
 
+  if ( helpRequested ) {
+    std::cout
+      << "Usage: mpags-cipher [options] \n"
+      << "Options: \n"
+      << "-h   Display this information \n"
+      << "--help Display this information \n"
+      << "-i   The following argument will be used as the input file \n"
+      << "-o   The following argument will be used as the output file \n"
+      << "--version   Prints the current program version\n\n"
+      << "Currently this program will print any alphanumeric text capitalised and convert numbers to text.\n"
+      << "Text entry continues until CTRL + D is pressed.\n"
+      << std::endl;
+    return 0;
+  }
+
+  if ( versionRequested ) {
+    std::cout << "Version number = " << vNum << std::endl;
+    return 0;
+  }
+
+  if ( ! input_file.empty() ) {
+    std::cout << "[warning] input from file not yet implemented, using standard input instead.\nRequested input file = " << input_file << std::endl;
+  }
 
   //This is the main functionality of the program
   std::string output{""};
@@ -112,5 +133,10 @@ int main(int argc, char* argv[])
 
 
     }
+
+  if ( ! output_file.empty() ) {
+    std::cout << "[warning] output to file not yet implemented, using standard output instead.\nRequested output file = " << output_file << std::endl;
+  }
+
   std::cout << output << std::endl;
 }
